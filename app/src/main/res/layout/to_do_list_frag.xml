@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="androidx.core.content.ContextCompat" />
+
+        <variable
+            name="viewmodel"
+            type="com.github.meaninglesscode.todolistapp.todolist.ToDoListViewModel" />
+
+    </data>
+
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <com.github.meaninglesscode.todolistapp.ScrollChildSwipeRefreshLayout
+            android:id="@+id/refresh_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:onRefreshListener="@{viewmodel::refresh}"
+            app:refreshing="@{viewmodel.dataLoading}">
+
+            <RelativeLayout
+                android:id="@+id/toDoItemsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:id="@+id/toDoItemsLinearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="@{viewmodel.empty ? View.GONE : View.VISIBLE}">
+
+                    <TextView
+                        android:id="@+id/filteringLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/list_item_padding"
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:layout_marginRight="@dimen/list_item_padding"
+                        android:layout_marginBottom="@dimen/activity_vertical_margin"
+                        android:gravity="center_vertical"
+                        android:text="@{context.getString(viewmodel.currentFilteringLabel)}"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/to_do_items_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:items="@{viewmodel.items}" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/noToDoItems"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="vertical"
+                    android:visibility="@{viewmodel.empty ? View.VISIBLE : View.GONE}"
+                    tools:ignore="UseCompoundDrawables">
+
+                    <ImageView
+                        android:id="@+id/noToDoItemsIcon"
+                        android:layout_width="96dp"
+                        android:layout_height="96dp"
+                        android:layout_gravity="center"
+                        android:src="@{ContextCompat.getDrawable(context, viewmodel.noItemsIconRes)}"
+                        android:contentDescription="@string/no_items_contentDescription" />
+
+                    <TextView
+                        android:id="@+id/noToDoItemsMain"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="@dimen/list_item_padding"
+                        android:text="@{context.getString(viewmodel.noItemsLabel)}" />
+                </LinearLayout>
+            </RelativeLayout>
+
+        </com.github.meaninglesscode.todolistapp.ScrollChildSwipeRefreshLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_add_to_do_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            android:src="@drawable/ic_add"
+            app:fabSize="normal"
+            app:layout_anchor="@id/refresh_layout"
+            app:layout_anchorGravity="bottom|right|end"
+            android:contentDescription="@string/ic_add_contentDescription" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
+

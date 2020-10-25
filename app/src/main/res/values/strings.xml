@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">To Do List</string>
+
+    <string name="add_to_do_item">New To Do Item</string>
+    <string name="edit_to_do_item">Edit To Do Item</string>
+
+    <string name="to_do_item_marked_complete">Item marked complete</string>
+    <string name="to_do_item_marked_active">Item marked active</string>
+
+    <string name="loading_items_error">Error while loading to do items</string>
+    <string name="completed_items_cleared">Completed to do items cleared</string>
+
+    <string name="menu_filter">Filter</string>
+    <string name="menu_clear">Clear completed</string>
+    <string name="menu_delete_item">Delete to do item</string>
+
+    <string name="navigation_view_header_title">Todo</string>
+
+    <string name="title_hint">Title</string>
+    <string name="description_hint">Enter your content here.</string>
+    <string name="empty_item_message">To dos cannot be empty</string>
+    <string name="time_picker_hint">Press to enter due date for this item</string>
+    <string name="time_viewer_hint">No due date set for this item</string>
+    <string name="successfully_saved_item_message">To do item saved</string>
+    <string name="list_title">To Do Item List</string>
+    <string name="no_data">No data</string>
+    <string name="loading">Loading</string>
+    <string name="clear_date_button_text">Clear Date</string>
+
+    <string name="ic_add_contentDescription">Plus button to add new item</string>
+    <string name="ic_done_contentDescription">Confirmation check mark</string>
+    <string name="ic_edit_contentDescription">Begin editing pencil</string>
+    <string name="no_items_contentDescription">Icon indicating no to do items are shown</string>
+
+    <string-array name="list_items_array">
+        <item>@string/nav_all</item>
+        <item>@string/nav_active</item>
+        <item>@string/nav_completed</item>
+        <item>@string/nav_has_due_date</item>
+        <item>@string/nav_past_due</item>
+        <item>@string/nav_due_today</item>
+        <item>@string/nav_due_this_week</item>
+    </string-array>
+
+    <string name="nav_all">All</string>
+    <string name="nav_active">Active</string>
+    <string name="nav_completed">Completed</string>
+    <string name="nav_has_due_date">Has Due Date</string>
+    <string name="nav_past_due">Past Due</string>
+    <string name="nav_due_today">Due Today</string>
+    <string name="nav_due_this_week">Due This Week</string>
+
+    <string name="label_all">All To Do Items</string>
+    <string name="label_active">Active To Do Items</string>
+    <string name="label_completed">Completed To Do Items</string>
+    <string name="label_has_due_date">To Do Items with Due Dates</string>
+    <string name="label_past_due">To Do Items Past Due</string>
+    <string name="label_due_today">To Do Items Due Today</string>
+    <string name="label_due_this_week">To Do Items Due this Week</string>
+
+    <string name="no_items_all">You have no to dos!</string>
+    <string name="no_items_active">You have no active to do items!</string>
+    <string name="no_items_completed">You have no completed to do items!</string>
+    <string name="no_items_due">You have no items with due dates set!</string>
+    <string name="no_items_past_due">You have no items past due!</string>
+    <string name="no_items_due_today">You have no items due today!</string>
+    <string name="no_items_due_this_week">You have no items due this week!</string>
+
+    <string name="refresh">Refresh</string>
+
+    <string name="successfully_deleted_item_message">To do item was deleted</string>
+    <string name="successfully_added_item_message">To do item added</string>
+
+    <string name="no_data_description" />
+
+</resources>

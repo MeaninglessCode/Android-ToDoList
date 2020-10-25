@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/toDoListFragment">
+
+    <fragment
+        android:id="@+id/toDoItemViewFragment"
+        android:name="com.github.meaninglesscode.todolistapp.todoitemview.ToDoItemViewFragment"
+        android:label="To Do Item Details">
+        <action
+            android:id="@+id/action_toDoItemViewFragment_to_toDoItemModifyFragment"
+            app:destination="@id/toDoItemModifyFragment" />
+        <argument
+            android:name="id"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_toDoItemViewFragment_to_toDoListFragment"
+            app:destination="@id/toDoListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/toDoListFragment"
+        android:name="com.github.meaninglesscode.todolistapp.todolist.ToDoListFragment"
+        android:label="@string/app_name">
+        <action
+            android:id="@+id/action_toDoListFragment_to_toDoItemViewFragment"
+            app:destination="@id/toDoItemViewFragment" />
+        <action
+            android:id="@+id/action_toDoListFragment_to_toDoItemModifyFragment"
+            app:destination="@id/toDoItemModifyFragment" />
+        <argument
+            android:name="userMessage"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
+    <fragment
+        android:id="@+id/toDoItemModifyFragment"
+        android:name="com.github.meaninglesscode.todolistapp.todoitemmodify.ToDoItemModifyFragment"
+        android:label="{title}">
+        <argument
+            android:name="id"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="title"
+            app:argType="string"
+            app:nullable="false" />
+        <action
+            android:id="@+id/action_toDoItemModifyFragment_to_toDoListFragment"
+            app:destination="@id/toDoListFragment"
+            />
+    </fragment>
+    <argument
+        android:name="userMessage"
+        android:defaultValue="0" />
+</navigation>

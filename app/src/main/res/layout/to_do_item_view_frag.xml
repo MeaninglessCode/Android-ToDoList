@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="android.widget.CompoundButton" />
+
+        <import type="com.github.meaninglesscode.todolistapp.util.GetDateStringFromMillisKt" />
+
+        <variable
+            name="viewmodel"
+            type="com.github.meaninglesscode.todolistapp.todoitemview.ToDoItemViewViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+
+        <com.github.meaninglesscode.todolistapp.ScrollChildSwipeRefreshLayout
+            android:id="@+id/refresh_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:onRefreshListener="@{viewmodel::refresh}"
+            app:refreshing="@{viewmodel.dataLoading}">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingBottom="@dimen/activity_vertical_margin">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingTop="@dimen/activity_vertical_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:paddingBottom="@dimen/activity_vertical_margin"
+                    android:visibility="@{viewmodel.isDataAvailable ? View.GONE : View.VISIBLE}">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/no_data"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:visibility="@{viewmodel.dataLoading ? View.GONE : View.VISIBLE}" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingTop="@dimen/activity_vertical_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:paddingBottom="@dimen/activity_vertical_margin"
+                    android:visibility="@{viewmodel.isDataAvailable ? View.VISIBLE : View.GONE}">
+
+                    <CheckBox
+                        android:id="@+id/to_do_item_view_complete"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                        android:checked="@{viewmodel.completed}"
+                        android:onClick="@{(view) -> viewmodel.setCompleted(((CompoundButton)view).isChecked())}"
+                        android:paddingTop="1dp" />
+
+                    <TextView
+                        android:id="@+id/to_do_item_view_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/to_do_item_view_complete"
+                        android:paddingTop="1dp"
+                        android:text="@{viewmodel.item.title}"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    <TextView
+                        android:id="@+id/to_do_item_view_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/to_do_item_view_title"
+                        android:layout_toEndOf="@id/to_do_item_view_complete"
+                        android:paddingTop="1dp"
+                        android:text="@{viewmodel.item.content}"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <EditText
+                        android:id="@+id/to_do_item_view_due_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/to_do_item_view_content"
+                        android:autofillHints="to do item due date"
+                        android:cursorVisible="false"
+                        android:ems="10"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:hint="@string/time_viewer_hint"
+                        android:inputType="date"
+                        android:text="@{GetDateStringFromMillisKt.getDateStringFromMillis(viewmodel.item.dueDate, GetDateStringFromMillisKt.DEFAULT_FORMAT)}"
+                        android:textSize="12sp" />
+
+                </RelativeLayout>
+            </LinearLayout>
+        </com.github.meaninglesscode.todolistapp.ScrollChildSwipeRefreshLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_edit_to_do_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            android:contentDescription="@string/ic_edit_contentDescription"
+            android:src="@drawable/ic_edit"
+            app:fabSize="normal"
+            app:layout_anchor="@id/refresh_layout"
+            app:layout_anchorGravity="bottom|right|end" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
